@@ -1,0 +1,22 @@
+[build-system]
+requires = ['setuptools']
+build-backend = "setuptools.build_meta"
+
+[project]
+name="Customer-Feedback-Theme-Extractor"
+version="0.0.1"
+authors=[{"name"= "Sameer Gururaj Mathad", "email"= "sameeragmathad@gmail.com"}]
+description="This is the starting point for today."
+keywords=["pandas", "sentence-transfomer"]
+requires-python=">=3.12"
+readme="README.md"
+dynamic=["dependencies", "optional-dependencies"]
+
+[tool.setuptools]
+packages=[]
+
+[tool.setuptools.dynamic]
+dependencies = {file=["requirements/requirements.txt"]}
+
+[tool.setuptools.dynamic.optional-dependencies]
+dev = {file=["requirements/requirements_dev.txt"]}
