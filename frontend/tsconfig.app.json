@@ -29,6 +29,7 @@
       "@/*": ["./src/*"],
       "base": ["."],
       "components": ["./src/components"],
+      "interfaces": ["./src/interfaces"],
       "reusables": ["./src/reusables"]
     }
   },
