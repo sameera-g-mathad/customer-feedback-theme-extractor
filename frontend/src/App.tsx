@@ -1,10 +1,11 @@
+import { FeedBackUpload } from "@/components";
 
 function App() {
 
   return (
-    <>
-      <div>Project initiated</div>
-    </>
+    <div>
+      <FeedBackUpload />
+    </div>
   )
 }
 
