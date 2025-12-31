@@ -11,14 +11,14 @@ export const FileList: React.FC<fileListInterface> = ({ name, progress, size, ty
 
     return <div className='border rounded-lg flex gap-5 items-center p-2'>
         <div>
-            <FileText />
+            <FileText size={40} />
         </div>
-        <div className="flex flex-col gap-2 grow">
+        <div className="flex flex-col gap-2 grow text-gray-500">
             <span>
                 {name}
             </span>
             <div className="flex justify-between">
-                <span>{newSize}</span>
+                <span className="text-sm">{newSize}</span>
             </div>
             <div className="flex items-center gap-2">
                 <ProgressBar progress={progress} />

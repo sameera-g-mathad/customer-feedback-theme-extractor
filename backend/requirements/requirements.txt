@@ -6,3 +6,4 @@ matplotlib
 sentence-transformers
 scikit-learn
 python-docx
+python-multipart

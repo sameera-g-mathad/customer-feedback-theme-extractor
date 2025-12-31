@@ -34,10 +34,10 @@ export const FeedBackUpload: React.FC = () => {
 
         const uploadPromises = files.map(async (file) => {
             const formData = new FormData();
-            formData.append('file', file.file)
+            formData.append('files', file.file)
             try {
                 // dummy call for now
-                await axios.post('https://httpbin.org/post', formData, {
+                await axios.post('http://127.0.0.1:8000/upload', formData, {
                     onUploadProgress: (progressEvent) => {
                         const progress = Math.round(
                             (progressEvent.loaded * 100) / (progressEvent.total || 1),
@@ -60,32 +60,34 @@ export const FeedBackUpload: React.FC = () => {
 
     }
 
-    return <div className="flex flex-col gap-3 w-[40%]">
-        <div className="border flex flex-col justify-center items-center gap-3 p-3 rounded-lg">
-            <span className="border rounded-lg p-1.5 border-gray-300">
-                <CloudUpload color="gray" />
-            </span>
-            <div className="font-medium cursor-pointer  text-blue-400 hover:text-blue-500 hover:underline">
-                <FileUpload accept=".pdf,.xlsx,.pdf,.docx,.txt,.json" multiple={true} onFileupload={processFiles} />
+    return <div className="w-full h-full flex justify-center items-center">
+        <div className="flex flex-col justify-center gap-3 w-[40%]">
+            <div className="border flex flex-col justify-center items-center gap-3 p-3 rounded-lg flex-1">
+                <span className="border rounded-lg p-1.5 border-gray-300">
+                    <CloudUpload color="gray" />
+                </span>
+                <div className="font-medium cursor-pointer  text-blue-400 hover:text-blue-500 hover:underline">
+                    <FileUpload accept=".pdf,.xlsx,.pdf,.docx,.txt,.json" multiple={true} onFileupload={processFiles} />
+                </div>
+                <span className="text-gray-400 text-sm">
+                    CSV, XLSX, PDF, DOCX, TXT or JSON
+                </span>
             </div>
-            <span className="text-gray-400 text-sm">
-                CSV, XLSX, PDF, DOCX, TXT or JSON
-            </span>
-        </div>
-        <div className="flex justify-end gap-3 ">
-            <button onClick={uploadFiles}>upload</button>
-            <button onClick={() => setFiles([])}>clear</button>
-        </div>
-        <div className="flex flex-col gap-3">
-            {
-                files.length > 0 ?
-                    files.map(upload => {
-                        const { name, size, type } = upload.file
+            <div className="flex justify-end gap-3">
+                <button onClick={uploadFiles}>upload</button>
+                <button onClick={() => setFiles([])}>clear</button>
+            </div>
+            <div className="flex flex-col gap-3 max-h-90 overflow-y-scroll">
+                {
+                    files.length > 0 ?
+                        files.map(upload => {
+                            const { name, size, type } = upload.file
 
-                        return <FileList key={upload.id} name={name} size={size} progress={upload.progress} type={type} />
-                    })
-                    : ''
-            }
-        </div >
+                            return <FileList key={upload.id} name={name} size={size} progress={upload.progress} type={type} />
+                        })
+                        : ''
+                }
+            </div >
+        </div>
     </div>;
 };

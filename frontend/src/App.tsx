@@ -3,7 +3,7 @@ import { FeedBackUpload } from "@/components";
 function App() {
 
   return (
-    <div>
+    <div className="w-screen h-screen">
       <FeedBackUpload />
     </div>
   )
