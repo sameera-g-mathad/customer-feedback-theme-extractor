@@ -74,8 +74,8 @@ export const FeedBackUpload: React.FC = () => {
                 </span>
             </div>
             <div className="flex justify-end gap-3">
-                <button onClick={uploadFiles}>upload</button>
-                <button onClick={() => setFiles([])}>clear</button>
+                <button className="border" onClick={uploadFiles}>upload</button>
+                <button className="border" onClick={() => setFiles([])}>clear</button>
             </div>
             <div className="flex flex-col gap-3 max-h-90 overflow-y-scroll">
                 {
