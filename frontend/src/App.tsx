@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { FeedBackUpload, Home } from "@/components";
+import { Home, Uploads } from "@/components";
 
 function App() {
 
@@ -8,7 +8,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index Component={Home} path="/" />
-          <Route Component={FeedBackUpload} path="/upload" />
+          <Route Component={Uploads} path="/upload" />
         </Routes>
       </BrowserRouter>
 
