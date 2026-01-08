@@ -52,16 +52,6 @@ export const FileList: React.FC<fileListInterface> = ({
             {/* Row 2: Progress */}
             <div className="flex items-center gap-2 mt-3">
                 <ProgressBar progress={progress} />
-
-                <motion.span
-                    key={progress}
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="text-sm text-slate-500 text-right"
-                >
-                    {progress}%
-                </motion.span>
             </div>
         </motion.div>
     );
