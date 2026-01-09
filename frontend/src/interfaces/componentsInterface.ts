@@ -7,6 +7,5 @@ export type FileType = {
 export interface fileListInterface {
   name: string;
   size: number;
-  type: string;
   progress: number;
 }
