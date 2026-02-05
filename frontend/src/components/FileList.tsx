@@ -50,9 +50,11 @@ export const FileList: React.FC<fileListInterface> = ({
             </div>
 
             {/* Row 2: Progress */}
-            <div className="flex items-center gap-2 mt-3">
-                <ProgressBar progress={progress} />
-            </div>
+            {progress < 100 && (
+                <div className={`flex items-center gap-2`}>
+                    <ProgressBar progress={progress} />
+                </div>
+            )}
         </motion.div>
     );
 };

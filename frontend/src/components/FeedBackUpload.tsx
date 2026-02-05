@@ -10,6 +10,7 @@ import { CloudUpload } from "lucide-react";
 export const FeedBackUpload: React.FC = () => {
     const [files, setFiles] = useState<FileType[]>([]);
     const [uploading, setUploading] = useState<boolean>(false);
+    const [isfileUploaded, setIsFileUploaded] = useState<boolean>(false)
 
     const processFiles = (e: ChangeEvent<HTMLInputElement>) => {
         if (!e.target || !e.target.files) return;
@@ -22,6 +23,24 @@ export const FeedBackUpload: React.FC = () => {
 
         setFiles((prev) => [...prev, ...newFiles]);
     };
+
+    const analyzeFiles = async () => {
+        try {
+            await axios.post("http://127.0.0.1:8000/analyze");
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    const clearFiles = async () => {
+        try {
+            await axios.delete("http://127.0.0.1:8000/clear");
+            setFiles([])
+            setIsFileUploaded(false)
+        } catch (e) {
+            console.error(e);
+        }
+    }
 
     const uploadFiles = async () => {
         if (files.length === 0 || uploading) return;
@@ -55,6 +74,7 @@ export const FeedBackUpload: React.FC = () => {
 
         await Promise.all(uploadPromises);
         setUploading(false);
+        setIsFileUploaded(true);
     };
 
     return (
@@ -109,8 +129,18 @@ export const FeedBackUpload: React.FC = () => {
                 <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    disabled={uploading}
-                    className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-500 disabled:opacity-50"
+                    disabled={!isfileUploaded || files.length == 0}
+                    className="px-4 py-2 rounded-lg border bg-green-600 text-white hover:bg-green-500 disabled:opacity-75 disabled:cursor-not-allowed"
+                    onClick={analyzeFiles}
+                >
+                    Analyze
+                </motion.button>
+
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    disabled={uploading || files.length == 0}
+                    className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-500 disabled:opacity-75 disabled:cursor-not-allowed"
                     onClick={uploadFiles}
                 >
                     {uploading ? "Uploading..." : "Upload"}
@@ -120,7 +150,7 @@ export const FeedBackUpload: React.FC = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-4 py-2 rounded-lg border"
-                    onClick={() => setFiles([])}
+                    onClick={clearFiles}
                 >
                     Clear
                 </motion.button>
